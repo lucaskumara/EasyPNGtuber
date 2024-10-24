@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>EasyPNGTuber Settings</title>
+    </head>
+    <body>
+        <div id="inputIndicator" style="display: block; width: 100px; height: 100px; background-color: red;"></div>
+
+        <br>
+
+        <h1>Settings</h1>
+
+        <h4>Mic Input</h4>
+        <select id="inputSelector"></select>
+
+        <h4>Open Threshold</h4>
+        <input id="openThresholdSlider" type="range" min="0" max="100" value="60" class="slider" />
+        <input id="openThresholdNumber" type="number" min="0" max="100" value="60" />
+
+        <h4>Close Threshold</h4>
+        <input id="closeThresholdSlider" type="range" min="0" max="100" value="40" class="slider" />
+        <input id="closeThresholdNumber" type="number" min="0" max="100" value="40" />
+
+        <hr>
+
+        <!-- <h3>Files</h3>
+        <h4>Not talking</h4>
+        <button id="file1">Choose file</button>
+        <button id="file1-remove">Remove</button>
+        
+        <h4>Talking</h4>
+        <button id="file2">Choose file</button>
+        <button id="file1-remove">Remove</button> -->
+
+        <script src="renderer.js"></script>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "easypngtuber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Lucas Kumara",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^33.0.2"
+  }
+}
