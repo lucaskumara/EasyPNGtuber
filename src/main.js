@@ -29,6 +29,8 @@ function createDisplayWindow() {
         width: 800,
         height: 600,
         transparent: true,
+        alwaysOnTop: true,
+        // autoHideMenuBar: true,
         frame: false,
         webPreferences: {
             nodeIntegration: true,
@@ -37,8 +39,6 @@ function createDisplayWindow() {
     });
 
     window.loadFile('src/display/display.html');
-
-    window.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {

@@ -5,7 +5,7 @@ const { ipcRenderer } = require("electron");
 const indicatorElement = document.getElementById("inputIndicator");
 const inputSelector = document.getElementById("inputSelector");
 
-async function loadInputSelectorValues() {
+async function loadInputSelectorOptions() {
     const devices = await navigator.mediaDevices.enumerateDevices()
     const inputDevices = devices.filter(device => device.kind === "audioinput");
 
@@ -112,7 +112,7 @@ openThresholdNumber.addEventListener("input", (event) => {
 
 closeThresholdSlider.addEventListener("input", (event) => {
     closeThresholdNumber.value = event.target.value;
-    
+
     localStorage.setItem("closeThreshold", event.target.value)
 });
 
@@ -124,20 +124,46 @@ closeThresholdNumber.addEventListener("input", (event) => {
 
 // File Uploads
 
-// file1Element.addEventListener('click', async () => {
-//     const filePaths = await ipcRenderer.invoke('dialog:openFile');
+const notTalkingAddButton = document.getElementById("notTalkingAddButton");
+const notTalkingRemoveButton = document.getElementById("notTalkingRemoveButton");
+const notTalkingImagePath = document.getElementById("notTalkingImagePath");
+const talkingAddButton = document.getElementById("talkingAddButton");
+const talkingRemoveButton = document.getElementById("talkingRemoveButton");
+const talkingImagePath = document.getElementById("talkingImagePath");
 
-//     localStorage.setItem('file1Path', filePaths[0]);
-// });
+function loadImagePaths() {
+    notTalkingImagePath.innerText = localStorage.getItem("notTalkingImagePath");
+    talkingImagePath.innerText = localStorage.getItem("talkingImagePath");
+}
 
+notTalkingAddButton.addEventListener("click", async () => {
+    const filePaths = await ipcRenderer.invoke("dialog:openFile");
 
-// file2Element.addEventListener('click', async () => {
-//     const filePaths = await ipcRenderer.invoke('dialog:openFile');
+    localStorage.setItem("notTalkingImagePath", filePaths[0]);
 
-//     localStorage.setItem('file2Path', filePaths[0]);
-// });
+    notTalkingImagePath.innerText = filePaths[0];
+});
 
-(() => {
-    loadInputSelectorValues();
-    loadNoiseGateValues();
-})();
+notTalkingRemoveButton.addEventListener("click", async () => {
+    localStorage.removeItem("notTalkingImagePath");
+
+    notTalkingImagePath.innerText = "";
+});
+
+talkingAddButton.addEventListener("click", async () => {
+    const filePaths = await ipcRenderer.invoke("dialog:openFile");
+
+    localStorage.setItem("talkingImagePath", filePaths[0]);
+
+    talkingImagePath.innerText = filePaths[0];
+});
+
+talkingRemoveButton.addEventListener("click", async () => {
+    localStorage.removeItem("talkingImagePath");
+
+    talkingImagePath.innerText = "";
+});
+
+loadInputSelectorOptions();
+loadNoiseGateValues();
+loadImagePaths();
