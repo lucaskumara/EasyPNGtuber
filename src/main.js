@@ -8,8 +8,12 @@ ipcMain.handle('dialog:openFile', async () => {
 });
 
 
+let settingsWindow;
+let displayWindow;
+
+
 function createSettingsWindow() {
-    const window = new BrowserWindow({
+    settingsWindow = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -18,14 +22,22 @@ function createSettingsWindow() {
         }
     });
 
-    window.loadFile('src/settings/settings.html');
+    settingsWindow.loadFile('src/settings/settings.html');
 
-    window.webContents.openDevTools();
+    settingsWindow.webContents.openDevTools();
+
+    settingsWindow.on('closed', () => {
+        if (displayWindow) {
+            displayWindow.close();
+        }
+        
+        settingsWindow = null;
+    });
 }
 
 
 function createDisplayWindow() {
-    const window = new BrowserWindow({
+    displayWindow = new BrowserWindow({
         width: 800,
         height: 600,
         transparent: true,
@@ -38,7 +50,7 @@ function createDisplayWindow() {
         }
     });
 
-    window.loadFile('src/display/display.html');
+    displayWindow.loadFile('src/display/display.html');
 }
 
 app.whenReady().then(() => {

@@ -9,7 +9,15 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        name: "EasyPNGTuber",
+        shortcut: {
+          desktop: true,
+          startMenu: true
+        },
+        runAfterFinish: false,
+        appId: 'kumara.lucas'
+      },
     },
     {
       name: '@electron-forge/maker-zip',

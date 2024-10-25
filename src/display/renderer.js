@@ -47,9 +47,9 @@ async function processAudioInput({ audioStartCallback, audioStopCallback }) {
 
 processAudioInput({
     audioStartCallback: () => {
-        imageElement.src = localStorage.getItem("talkingImagePath")
+        imageElement.src = localStorage.getItem("talkingImagePath") || "../../assets/placeholder.jpg";
     },
     audioStopCallback: () => {
-        imageElement.src = localStorage.getItem("notTalkingImagePath")
+        imageElement.src = localStorage.getItem("notTalkingImagePath") || "../../assets/placeholder.jpg";
     }
 });

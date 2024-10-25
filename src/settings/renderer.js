@@ -18,7 +18,9 @@ async function loadInputSelectorOptions() {
         inputSelector.appendChild(optionElement);
     });
 
-    inputSelector.value = localStorage.getItem("inputId");
+    inputSelector.value = localStorage.getItem("inputId") || inputDevices[0].deviceId;
+
+    localStorage.setItem("inputId", inputDevices[0].deviceId);
 
     processAudioInput({
         audioStartCallback: () => {
